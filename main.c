@@ -72,19 +72,17 @@ int main() {
       gamer.plane.y = -cos(angle);
     }
     if (IsKeyDown(KEY_W)) {
-      if (IsKeyDown(KEY_W)) {
 
-        if (world_map[(int)(gamer.pos.y + (speed.y * dt * gamer.dir.y) +
-                            check(speed.y * dt * gamer.dir.y))]
-                     [(int)gamer.pos.x] != 1) {
-          gamer.pos.y += speed.y * dt * gamer.dir.y;
-        }
+      if (world_map[(int)(gamer.pos.y + (speed.y * dt * gamer.dir.y) +
+                          check(speed.y * dt * gamer.dir.y))]
+                   [(int)gamer.pos.x] != 1) {
+        gamer.pos.y += speed.y * dt * gamer.dir.y;
+      }
 
-        if (world_map[(int)gamer.pos.y]
-                     [(int)(gamer.pos.x + (speed.x * dt * gamer.dir.x) +
-                            check(speed.x * dt * gamer.dir.x))] != 1) {
-          gamer.pos.x += speed.x * dt * gamer.dir.x;
-        }
+      if (world_map[(int)gamer.pos.y]
+                   [(int)(gamer.pos.x + (speed.x * dt * gamer.dir.x) +
+                          check(speed.x * dt * gamer.dir.x))] != 1) {
+        gamer.pos.x += speed.x * dt * gamer.dir.x;
       }
     }
     if (IsKeyDown(KEY_S)) {
