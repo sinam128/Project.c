@@ -129,8 +129,85 @@ int main() {
 
       int mapX = (int)gamer.pos.x;
       int mapY = (int)gamer.pos.y;
-    }
+      double stepX;
+      double sideDistX;
 
+      double stepY;
+      double sideDistY;
+
+      double deltaDistX;
+      double deltaDistY;
+      if (rayDirX != 0) {
+        deltaDistX = fabs(1 / rayDirX);
+      } else {
+        deltaDistX = 1e28;
+      }
+      if (rayDirY != 0) {
+        deltaDistY = fabs(1 / rayDirY);
+      } else {
+        deltaDistY = 1e28;
+      }
+
+      if (rayDirX < 0) {
+        stepX = -1;
+        sideDistX = (gamer.pos.x - mapX) * deltaDistX;
+      } else {
+        stepX = 1;
+        sideDistX = (mapX + 1.0 - gamer.pos.x) * deltaDistX;
+      }
+      if (rayDirY < 0) {
+        stepY = -1;
+        sideDistY = (gamer.pos.y - mapY) * deltaDistY;
+      } else {
+        stepY = 1;
+        sideDistY = (mapY + 1.0 - gamer.pos.y) * deltaDistY;
+      }
+
+      int side;
+      int flag = 0;
+
+      while (flag == 0) {
+        if (sideDistX < sideDistY) {
+          sideDistX += deltaDistX;
+          mapX += stepX;
+          side = 0;
+        } else {
+          sideDistY += deltaDistY;
+          mapY += stepY;
+          side = 1;
+        }
+
+        if (world_map[mapY][mapX] > 0) {
+          flag = 1;
+        }
+      }
+      double perpWallDist;
+
+      if (side == 0)
+        perpWallDist = (sideDistX - deltaDistX);
+      else
+        perpWallDist = (sideDistY - deltaDistY);
+
+      int lineHeight = (int)(640 / perpWallDist);
+
+      int drawStart = -lineHeight / 2 + 320;
+      if (drawStart < 0)
+        drawStart = 0;
+      int drawEnd = lineHeight / 2 + 320;
+      if (drawEnd >= 640)
+        drawEnd = 639;
+
+      Color color = RED;
+      if (side == 1) {
+        color = MAROON;
+      }
+
+      DrawLine(i, 0, i, drawStart - 1, SKYBLUE);
+
+      DrawLine(i, drawStart, i, drawEnd, color);
+
+      DrawLine(i, drawEnd + 1, i, 639, GREEN);
+    }
     for (int i = 0; i < strong; i++) {
       for (int j = 0; j < strong; j++) {
         if (world_map[i][j] == 1) {
@@ -157,4 +234,3 @@ int main() {
 
   return 0;
 }
-// phase1 commit
