@@ -122,6 +122,14 @@ int main() {
         gamer.pos.x -= speed.x * dt * gamer.dir.y;
       }
     }
+    for (int i = 0; i < 640; i++) {
+      double cameraX = (double)(2 * i) / 640.0 - 1;
+      double rayDirX = gamer.dir.x + gamer.plane.x * cameraX;
+      double rayDirY = gamer.dir.y + gamer.plane.y * cameraX;
+
+      int mapX = (int)gamer.pos.x;
+      int mapY = (int)gamer.pos.y;
+    }
 
     for (int i = 0; i < strong; i++) {
       for (int j = 0; j < strong; j++) {
