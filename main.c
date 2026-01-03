@@ -61,6 +61,21 @@ int main() {
     if (IsKeyPressed(KEY_M)) {
       mapflag *= (-1);
     }
+    if (mapflag == -1) {
+      int checkmapX = GetMouseX() / 40;
+      int checkmapY = GetMouseY() / 40;
+      if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+        if (checkmapX != 0 && checkmapX != 15 && checkmapY != 0 &&
+            checkmapY != 15) {
+          world_map[checkmapY][checkmapX] = 0;
+        }
+      } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        if (checkmapX != 0 && checkmapX != 15 && checkmapY != 0 &&
+            checkmapY != 15) {
+          world_map[checkmapY][checkmapX] = 1;
+        }
+      }
+    }
     if (IsKeyDown(KEY_RIGHT)) {
       angle += dt * dspeed;
       gamer.dir.x = cos(angle);
