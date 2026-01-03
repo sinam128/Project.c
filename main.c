@@ -58,7 +58,7 @@ int main() {
     float dt = GetFrameTime();
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    if (IsKeyDown(KEY_M)) {
+    if (IsKeyPressed(KEY_M)) {
       mapflag *= (-1);
     }
     if (IsKeyDown(KEY_RIGHT)) {
