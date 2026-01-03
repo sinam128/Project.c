@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include <math.h>
+#include <stdio.h>
 
 #define dimension 40
 #define strong 16
@@ -55,6 +56,27 @@ int main() {
 
   SetTargetFPS(60);
   while (!WindowShouldClose()) {
+    if (IsKeyPressed(KEY_S)) {
+      FILE *file = fopen("txt.txt", "w");
+      for (int i = 0; i < 16; i++) {
+        for (int j = 0; j < 16; j++) {
+          fprintf(file, "%d ", world_map[i][j]);
+        }
+        fprintf(file, "\n");
+      }
+      fclose(file);
+    }
+    if (IsKeyPressed(KEY_L)) {
+      FILE *file = fopen("txt.txt", "r");
+      if (file != NULL) {
+        for (int i = 0; i < 16; i++) {
+          for (int j = 0; j < 16; j++) {
+            fscanf(file, "%d", &world_map[i][j]);
+          }
+        }
+        fclose(file);
+      }
+    }
     float dt = GetFrameTime();
     BeginDrawing();
     ClearBackground(RAYWHITE);
